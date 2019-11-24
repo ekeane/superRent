@@ -67,7 +67,7 @@ def viewVehicle(request):
 
     output = []
     for row in query:
-        output.append(row.split(','))
+        output.append(row)
 
     query.close()
 
@@ -83,6 +83,7 @@ def viewVehicle(request):
     
     tableData = {'ID': carId, 'Car Type': cartype, 'Location': loc, 'Interval': interval}
     df = pd.DataFrame(data=tableData)
+    df = df.to_html()
 
     context = {
         'query': df,
