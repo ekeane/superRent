@@ -10,20 +10,21 @@
   </head>
   <body>
     <h1>Make reservation</h1>
-    <form>
-        <div class="form-group" method="post">
+    <form action="" method="GET">
+        {% csrf_token %}
+        <div class="form-group" >
           <label for="carType">Car Type</label>
-          <input type="text" class="form-control" id="carType" aria-describedby="carType" placeholder="Enter car type">
+          <input value={{ carType }} type="text" class="form-control" name="carType" id="carType" aria-describedby="carType" placeholder="Enter car type">
         </div>
         <div class="form-group">
           <label for="location">Location</label>
-          <input type="text" class="form-control" id="location" placeholder="Enter location">
+          <input value={{ location }} type="text" class="form-control" name="location" id="location" placeholder="Enter location">
         </div>
         <div class="form-group">
           <label for="timeInterval">Time Interval</label>
-          <input type="timeInterval" class="form-control" id="timeInterval" placeholder="Enter time interval">
+          <input value={{ timeInterval }} type="timeInterval" class="form-control" name="timeInterval" id="timeInterval" placeholder="Enter time interval">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
       </form>
 
       {{ query }}

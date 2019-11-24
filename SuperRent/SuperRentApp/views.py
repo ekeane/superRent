@@ -16,8 +16,6 @@ def makeReservation(request):
     location = request.GET.get('location')
     timeInterval = request.GET.get('timeInterval')
 
-    print("THIS IS THE CAR TYPE", carType)
-
     if carType == None:
         carType = '*'
 
@@ -27,18 +25,21 @@ def makeReservation(request):
     if timeInterval == None:
         timeInterval = '*'
         
-    # query = connection.execute('select * FROM Vehicles WHERE cartype = ' + carType + ' AND carlocation = ' + location + ' AND carinterval = ' + timeInterval)
     query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s AND carinterval = %s', (carType, location, timeInterval))
-
+    
     output = []
     for row in query:
         output.append(row)
 
+    query.close()
+
     context = {
         'query': output,
+        'carType': carType,
+        'location': location,
+        'timeInterval': timeInterval,
     }
-
-    query.close()
+ 
     return render(request, "makeReservation.html", context)
 
 def rentVehicle(request):
