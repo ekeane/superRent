@@ -8,20 +8,38 @@ connection = engine.connect()
 
 # Landing page view:
 def landing(request):
-    query = connection.execute("select * FROM reservations")
+    
+    return render(request, "landing.html")
+
+def makeReservation(request):
+    carType = request.GET.get('carType')
+    location = request.GET.get('location')
+    timeInterval = request.GET.get('timeInterval')
+
+    print("THIS IS THE CAR TYPE", carType)
+
+    if carType == None:
+        carType = '*'
+
+    if location == None:
+        location = '*'
+
+    if timeInterval == None:
+        timeInterval = '*'
+        
+    # query = connection.execute('select * FROM Vehicles WHERE cartype = ' + carType + ' AND carlocation = ' + location + ' AND carinterval = ' + timeInterval)
+    query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s AND carinterval = %s', (carType, location, timeInterval))
+
     output = []
     for row in query:
         output.append(row)
-
 
     context = {
         'query': output,
     }
 
-    return render(request, "landing.html", context)
-
-def makeReservation(request):
-    return render(request, "makeReservation.html")
+    query.close()
+    return render(request, "makeReservation.html", context)
 
 def rentVehicle(request):
     return render(request, "rentVehicle.html")
