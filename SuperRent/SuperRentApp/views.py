@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import pandas as pd
 
 # DB Connection:
 from sqlalchemy import create_engine
@@ -71,12 +72,24 @@ def viewVehicle(request):
 
     output = []
     for row in query:
-        output.append(row)
+        output.append(row.split(','))
 
+    carId = []
+    cartype = []
+    loc = []
+    interval = []
+    for v in output:
+        carId.append(v[0])
+        cartype.append(v[1])
+        loc.append(v[2])
+        interval.append(v[3])
     query.close()
 
+    tableData = {'ID': carId, 'Car Type': cartype, 'Location': loc, 'Interval': interval}
+    df = pd.DataFrame(data=tableData)
+
     context = {
-        'query': output,
+        'query': df,
         'carType': carType,
         'location': location,
         'timeInterval': timeInterval,
