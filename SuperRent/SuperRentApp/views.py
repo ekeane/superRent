@@ -35,8 +35,40 @@ def viewVehicle(request):
     if timeInterval == None:
         timeInterval = '*'
         
-    query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s AND carinterval = %s', (carType, location, timeInterval))
+    # 0 empty  
+    if (carType != '' and location != '' and timeInterval != ''):    
+        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s AND carinterval = %s', (carType, location, timeInterval))
+    # carType empty or Location Empty or TimeInterval Empty or 2 empty or other 2 empty or other 2 empty or all 3 empty
+
+    # 3 empty
+    if (carType == '' and location == '' and timeInterval == ''):
+        query = connection.execute('select * FROM Vehicles')
+    # 1 empty cases
+
+    if (carType == '' and location != '' and timeInterval != ''):
+        query = connection.execute('select * FROM Vehicles WHERE carlocation = %s AND carinterval = %s', (location, timeInterval))
+
     
+    if (carType != '' and location == '' and timeInterval != ''):
+        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carinterval = %s', (carType, timeInterval))
+
+
+    if (carType != '' and location != '' and timeInterval == ''):
+        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s', (carType, location))
+
+    # 2 empty cases
+
+    if (carType == '' and location == '' and timeInterval != ''):
+        query = connection.execute('select * FROM Vehicles WHERE carinterval = %s', (timeInterval))
+
+    
+    if (carType != '' and location == '' and timeInterval == ''):
+        query = connection.execute('select * FROM Vehicles WHERE cartype = %s', (carType))
+
+
+    if (carType == '' and location != '' and timeInterval == ''):
+        query = connection.execute('select * FROM Vehicles WHERE carlocation = %s', (location))
+
     output = []
     for row in query:
         output.append(row)
