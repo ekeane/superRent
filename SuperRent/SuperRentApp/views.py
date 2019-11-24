@@ -13,8 +13,7 @@ def landing(request):
 
 def makeReservation(request):
     
- 
-    return render(request, "makeReservation.html", context)
+    return render(request, "makeReservation.html")
 
 def rentVehicle(request):
     return render(request, "rentVehicle.html")
