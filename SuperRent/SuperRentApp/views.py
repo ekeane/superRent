@@ -26,14 +26,7 @@ def viewVehicle(request):
     location = request.GET.get('location')
     timeInterval = request.GET.get('timeInterval')
 
-    if carType == None:
-        carType = '*'
-
-    if location == None:
-        location = '*'
-
-    if timeInterval == None:
-        timeInterval = '*'
+   ##################################################################
         
     # 0 empty  
     if (carType != '' and location != '' and timeInterval != ''):    
@@ -69,12 +62,15 @@ def viewVehicle(request):
     if (carType == '' and location != '' and timeInterval == ''):
         query = connection.execute('select * FROM Vehicles WHERE carlocation = %s', (location))
 
+        #############################################################
+
     output = []
     for row in query:
         output.append(row)
 
     query.close()
 
+    print(type(output[0]))
     context = {
         'query': output,
         'carType': carType,
