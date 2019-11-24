@@ -9,12 +9,13 @@
     <title>SuperRent</title>
   </head>
   <body>
-    <h1>SuperRent</h1>
-    <button type="button" class="btn btn-outline-primary">View Vehicles</button>
-    <button type="button" class="btn btn-outline-primary">Make a reservation</button>
-    <button type="button" class="btn btn-outline-primary">Rent a vehicle</button>
-    <button type="button" class="btn btn-outline-primary">Return a vehicle</button>
-
+    <div style="position: relative; left: 50%; top: 300px;">
+      <h1>SuperRent</h1>
+      <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Vehicles</button></a>
+      <a href="{% url 'makeReservation' %}"><button type="button" class="btn btn-outline-primary">Make a reservation</button></a>
+      <a href="{% url 'rentVehicle' %}"><button type="button" class="btn btn-outline-primary">Rent a vehicle</button></a>
+      <a href="{% url 'returnVehicle' %}"><button type="button" class="btn btn-outline-primary">Return a vehicle</button></a>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
