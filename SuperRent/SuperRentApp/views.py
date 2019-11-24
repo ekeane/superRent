@@ -49,4 +49,4 @@ def viewVehicle(request):
         'location': location,
         'timeInterval': timeInterval,
     }
-    return render(request, "viewVehicle.html")
+    return render(request, "viewVehicle.html", context)
