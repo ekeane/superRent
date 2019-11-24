@@ -20,9 +20,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('', landing, name="landing"),
-    url('/makeReservation', makeReservation, name="makeReservation"),
-    url('rentVehicle/', rentVehicle, name="rentVehicle"),
+    url(r'^$', landing, name="landing"),
+    url('makeReservation', makeReservation, name="makeReservation"),
+    url('rentVehicle', rentVehicle, name="rentVehicle"),
     url('returnVehicle/', returnVehicle, name="returnVehicle"),
     url('viewVehicle/', viewVehicle, name="viewVehicle"),
 ]
