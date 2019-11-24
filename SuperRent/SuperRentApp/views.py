@@ -4,7 +4,7 @@ import pandas as pd
 
 # DB Connection:
 from sqlalchemy import create_engine
-engine = create_engine('postgres://uwmavmxp:l5iO-IvPJlrfAB3AxVtgcpmd01NrkgBH@salt.db.elephantsql.com:5432/uwmavmxp')
+engine = create_engine('postgres://uwmavmxp:EvV_jHfeHg5W2wQOxX0QBTQxIrBI6I1T@salt.db.elephantsql.com:5432/uwmavmxp')
 connection = engine.connect()
 
 # Landing page view:
@@ -16,7 +16,7 @@ def makeReservation(request):
     cellPhone = request.POST.get('cellphone')
     name = request.POST.get('name')
     address = request.POST.get('address')
-    output = [('No oone')]
+    output = [('No one')]
 
     if cellPhone != None:
         query = connection.execute('INSERT INTO Customers1 (cellphone, Cname, Caddress) VALUES (%s, %s, %s)', (cellPhone, name, address))

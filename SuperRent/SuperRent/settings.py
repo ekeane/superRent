@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'uwmavmxp',
         'USER': 'uwmavmxp',
-        'PASSWORD': 'l5iO-IvPJlrfAB3AxVtgcpmd01NrkgBH',
+        'PASSWORD': 'EvV_jHfeHg5W2wQOxX0QBTQxIrBI6I1T',
         'HOST': 'salt.db.elephantsql.com',
         'PORT': '5432',
     }
