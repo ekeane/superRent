@@ -12,6 +12,17 @@ def landing(request):
     return render(request, "landing.html")
 
 def makeReservation(request):
+    
+ 
+    return render(request, "makeReservation.html", context)
+
+def rentVehicle(request):
+    return render(request, "rentVehicle.html")
+
+def returnVehicle(request):
+    return render(request, "returnVehicle.html")
+
+def viewVehicle(request):
     carType = request.GET.get('carType')
     location = request.GET.get('location')
     timeInterval = request.GET.get('timeInterval')
@@ -39,14 +50,4 @@ def makeReservation(request):
         'location': location,
         'timeInterval': timeInterval,
     }
- 
-    return render(request, "makeReservation.html", context)
-
-def rentVehicle(request):
-    return render(request, "rentVehicle.html")
-
-def returnVehicle(request):
-    return render(request, "returnVehicle.html")
-
-def viewVehicle(request):
     return render(request, "viewVehicle.html")
