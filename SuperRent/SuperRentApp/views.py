@@ -13,8 +13,22 @@ def landing(request):
     return render(request, "landing.html")
 
 def makeReservation(request):
-    
-    return render(request, "makeReservation.html")
+    cellPhone = request.POST.get('cellphone')
+    name = request.POST.get('name')
+    address = request.POST.get('address')
+    output = [('No oone')]
+
+    if cellPhone != None:
+        query = connection.execute('INSERT INTO Customers1 (cellphone, Cname, Caddress) VALUES (%s, %s, %s)', (cellPhone, name, address))
+        worked = connection.execute('SELECT Cname FROM Customers1 WHERE cellphone = %s', (cellPhone))
+        query.close()
+        for row in worked:
+            output[0] = row
+
+    context = { # to fix
+        'newCustomer': output[0],
+    }
+    return render(request, "makeReservation.html", context)
 
 def rentVehicle(request):
     return render(request, "rentVehicle.html")

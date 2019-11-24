@@ -16,23 +16,19 @@
         {% csrf_token %}
         <div class="form-group" >
           <label for="cellphone">Cellphone</label>
-          <input value={{ cellphone }} type="tel" class="form-control" name="cellphone" id="cellphone" aria-describedby="carType" placeholder="Enter cell phone number">
+          <input type="tel" class="form-control" name="cellphone" id="cellphone" aria-describedby="carType" placeholder="Enter cell phone number">
         </div>
         <div class="form-group">
           <label for="name">Name</label>
-          <input value={{ name }} type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+          <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input value={{ address }} type="text" class="form-control" name="address" id="address" placeholder="Enter address">
+          <input type="text" class="form-control" name="address" id="address" placeholder="Enter address">
         </div>
-        <div class="form-group">
-            <label for="dlicense">Drivers License</label>
-            <input value={{ timeInterval }} type="text" class="form-control" name="dlicense" id="dlicense" placeholder="Enter drivers license">
-          </div>
         <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
       </form>
-
+      <p> {{ newCustomer }} has been added</p> 
       <h2>Create reservation</h2>
       <form action="" method="GET">
           {% csrf_token %}
