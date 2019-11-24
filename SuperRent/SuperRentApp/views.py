@@ -24,6 +24,7 @@ def makeReservation(request):
         query.close()
         for row in worked:
             output[0] = row
+        worked.close()
 
     context = { # to fix
         'newCustomer': output[0],
