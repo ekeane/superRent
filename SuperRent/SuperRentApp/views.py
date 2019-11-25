@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import pandas as pd
+import random
 
 # DB Connection:
 from sqlalchemy import create_engine
@@ -13,21 +14,50 @@ def landing(request):
     return render(request, "landing.html")
 
 def makeReservation(request):
+
+    ################################   Add customer   ###################################### 
     cellPhone = request.POST.get('cellphone')
     name = request.POST.get('name')
     address = request.POST.get('address')
-    output = [('No one')]
+    outputCustomer = [('No one')]
 
     if cellPhone != None:
         query = connection.execute('INSERT INTO Customers1 (cellphone, Cname, Caddress) VALUES (%s, %s, %s)', (cellPhone, name, address))
         worked = connection.execute('SELECT Cname FROM Customers1 WHERE cellphone = %s', (cellPhone))
         query.close()
-        for row in worked:
-            output[0] = row
         worked.close()
+        for row in worked:
+            outputCustomer[0] = row
 
-    context = { # to fix
-        'newCustomer': output[0],
+    ################################   Add reservation   ###################################### 
+    outputReservation = []
+
+    confNo = "No reservation added"
+
+    carType = request.POST.get('carType')
+    cellphone = request.POST.get('cellphone')
+    fromdate = request.POST.get('fromdate')
+    fromtime = request.POST.get('fromtime')
+    todate = request.POST.get('todate')
+    totime = request.POST.get('totime')
+
+    if carType != None:
+        confNo = random.randint(134, 100000)
+        print("THIS IS THE confNO: ", confNo)
+        query = connection.execute('INSERT INTO Reservations1 (confNo, vtname, cellphone, fromDate, fromTime, toDate, toTime) VALUES (%s, %s, %s, %s, %s, %s, %s)', (confNo, carType, cellphone, fromdate, fromtime, todate, totime))
+        query.close()
+
+    context = { 
+        'newReservation': confNo,
+
+        'carType': carType,
+        'cellphone': cellphone,
+        'fromdate': fromdate,
+        'fromtime': fromtime,
+        'todate': todate,
+        'totime': totime,
+
+        'newCustomer': outputCustomer[0],
     }
     return render(request, "makeReservation.html", context)
 

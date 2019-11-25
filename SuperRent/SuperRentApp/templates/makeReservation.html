@@ -9,10 +9,10 @@
     <title>Make reservation</title>
   </head>
   <body>
-    <h1>Make reservation</h1>
+    <h1 style="position: relative; left: 25%;">Make reservation</h1>
 
     <h2>Add customer</h2>
-    <form action="" method="POST">
+    <form style="position: relative; left: 5%; width: 300px;" action="" method="POST">
         {% csrf_token %}
         <div class="form-group" >
           <label for="cellphone">Cellphone</label>
@@ -28,9 +28,9 @@
         </div>
         <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
       </form>
-      <p> {{ newCustomer }} has been added</p> 
+      <p> {{ newCustomer }} has been added.</p> 
       <h2>Create reservation</h2>
-      <form action="" method="GET">
+      <form style="position: relative; left: 5%; width: 300px;" action="" method="POST">
           {% csrf_token %}
           <div class="form-group" >
             <label for="carType">Car Type</label>
@@ -59,7 +59,14 @@
           <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
         </form>
     
-   
+        <h6> Confirmation Number:  {{ newReservation }} has been added. Please see details below:</h6> 
+        <div class="card" style="width: 25rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ carType }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ cellphone }}</h6>
+              <p class="card-text">Date/Time: {{ fromdate }}, {{ fromtime }} - {{ todate }}, {{ totime }}</p>
+            </div>
+          </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
