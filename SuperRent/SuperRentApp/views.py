@@ -250,3 +250,83 @@ def viewVehicle(request):
         'timeInterval': timeInterval,
     }
     return render(request, "viewVehicle.html", context)
+
+
+def viewBranch(request):
+    query = connection.execute('select * FROM Branch1')
+
+    output = []
+    for row in query:
+        output.append(row)
+
+    query.close()
+
+    loc = []
+    city = []
+    for info in output:
+        loc.append(info[0])
+        city.append(info[1])
+
+    tableData = {'Location': loc, 'City': city}
+    df = pd.DataFrame(data=tableData)
+    df = df.to_html()
+
+    context = {
+        'viewBranchAll': df 
+    }
+
+    return render(request, "viewBranch.html", context) 
+
+def viewCustomers(request):
+    query = connection.execute('select * FROM Customers1')
+
+    output = []
+    for row in query:
+        output.append(row)
+
+    query.close()
+
+    cellphone = []
+    cname = []
+    caddress = []
+    for info in output:
+        cellphone.append(info[0])
+        cname.append(info[1])
+        caddress.append(info[2])
+
+    tableData = {'Cell Phone': cellphone, 'Customer Name': cname, 'Customer Address': caddress}
+    df = pd.DataFrame(data=tableData)
+    df = df.to_html()
+
+    context = {
+        'viewCustomersAll': df 
+    }
+
+    return render(request, "viewCustomers.html", context)
+
+def allTables(request):
+    pg = 'pg_catalog'
+    info = 'information_schema'
+    query = connection.execute('select * FROM pg_catalog.pg_tables WHERE schemaname != %s AND schemaname != %s ', (pg, info))
+
+    output = []
+    for row in query:
+        output.append(row)
+    query.close()
+
+    first = []
+    second = []
+    for info in output:
+        if ("1" in str(info[1])):
+            first.append(info[0])
+            second.append(info[1])
+
+    tableData = {'Schema name': first, 'Table Name': second}
+    df = pd.DataFrame(data=tableData)
+    df = df.to_html()
+
+    context = {
+        'allTables': df
+    }
+
+    return render(request, "allTables.html", context)

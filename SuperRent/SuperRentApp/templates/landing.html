@@ -16,6 +16,25 @@
       <a href="{% url 'rentVehicle' %}"><button type="button" class="btn btn-outline-primary">Rent a vehicle</button></a>
       <a href="{% url 'returnVehicle' %}"><button type="button" class="btn btn-outline-primary">Return a vehicle</button></a>
     </div>
+
+
+    <div style="position: absolute; left: 30%; top: 450px;">
+        <h1 style="text-align: center">View Tables</h1>
+        <div class="row">
+            <a href="{% url 'viewBranch' %}"><button type="button" class="btn btn-outline-primary">View branch</button></a>
+            <a href="{% url 'viewCustomers' %}"><button type="button" class="btn btn-outline-primary">View Customers</button></a>
+            <a href="{% url 'rentVehicle' %}"><button type="button" class="btn btn-outline-primary">View Rentals</button></a>
+            <a href="{% url 'makeReservation' %}"><button type="button" class="btn btn-outline-primary">View Reservations</button></a>
+        </div>
+        <div class="row">
+            <a href="{% url 'returnVehicle' %}"><button type="button" class="btn btn-outline-primary">View Returns</button></a>
+            <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Vehicles</button></a>
+            <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Vehicle Type</button></a>
+            <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Users</button></a>
+            <a href="{% url 'allTables' %}"><button type="button" class="btn btn-outline-primary">View all tables</button></a>
+        </div>
+        
+      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
