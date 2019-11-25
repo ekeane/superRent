@@ -18,6 +18,6 @@
 7) Should be working on localhost:8000
 
 
-We use a cloud instance of Postgres via ElephentSQL
+We use a cloud instance of Postgres via ElephantSQL cloud host
 
 Django Backend
