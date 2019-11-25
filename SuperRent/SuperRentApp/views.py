@@ -25,7 +25,7 @@ def makeReservation(request):
         query = connection.execute('INSERT INTO Customers1 (cellphone, Cname, Caddress) VALUES (%s, %s, %s)', (cellPhone, name, address))
         worked = connection.execute('SELECT Cname FROM Customers1 WHERE cellphone = %s', (cellPhone))
         query.close()
-        worked.close()
+        # worked.close()
         for row in worked:
             outputCustomer[0] = row
 
