@@ -1,6 +1,5 @@
 # SuperRent Setup
 
-
 (Make sure Python3 and postgresql is installed)
 
 1) `git clone https://github.com/ekeane/superRent.git`
@@ -21,3 +20,5 @@
 We use a cloud instance of Postgres via ElephantSQL cloud host
 
 Django Backend
+
+Please see the DB folder for our SQL statements.
