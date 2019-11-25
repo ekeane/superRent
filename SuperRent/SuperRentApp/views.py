@@ -182,7 +182,7 @@ def viewVehicle(request):
         new5.append(v[8])
         new6.append(v[9])
         new7.append(v[10])
-    tableData = {'Vehicle License': carId, 'VehicleId': cartype, 'Make': loc, 'Year': interval, 'Model': new, 'Color': new2, 'Odometer': new3, 'Stat': new4, 'Vehicle Type': new5, 'Location': new6, 'City': new7}
+    tableData = {'Vehicle License': carId, 'VehicleId': cartype, 'Make': loc, 'Year': interval, 'Model': new, 'Color': new2, 'Odometer': new3, 'Status': new4, 'Vehicle Type': new5, 'Location': new6, 'City': new7}
     df = pd.DataFrame(data=tableData)
     df = df.to_html()
     
