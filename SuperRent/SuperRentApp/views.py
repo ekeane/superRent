@@ -75,7 +75,63 @@ def makeReservation(request):
     return render(request, "makeReservation.html", context)
 
 def rentVehicle(request):
-    return render(request, "rentVehicle.html")
+    confNo = request.POST.get('confNo')
+    vid = request.POST.get('vid')
+    cellphone = request.POST.get('cellphone')
+    fromdate = request.POST.get('fromdate')
+    fromtime = request.POST.get('fromtime')
+    todate = request.POST.get('todate')
+    totime = request.POST.get('totime')
+    odometer = request.POST.get('odometer')
+    cardName = request.POST.get('cardName')
+    cardNo = request.POST.get('cardNo')
+    ExpDate = request.POST.get('ExpDate')
+
+    errorMsg = ""
+    confNoRandomGenerated = ""
+    # try:
+    if cellphone != None:
+        confNoOutput = []
+        output = connection.execute('select * FROM Reservations1 WHERE confNo = %s', (confNo))
+        
+        for row in output:
+                confNoOutput.append(row)
+
+        print("this is the confNO inside the if", confNoOutput)
+        if (len(confNoOutput) > 0):
+            rid = random.randint(134, 1000000)
+            query = connection.execute('INSERT INTO Rentals1 (rid, vid, cellphone, fromDate, fromTime, toDate, toTime, odometer, cardName, cardNo, ExpDate, confNo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (rid, vid, cellphone, fromdate, fromtime, todate, totime, odometer, cardName, cardNo, ExpDate, confNo))
+            query.close()
+        else:
+            print("in else")
+            rid = random.randint(134, 1000000)
+            confNoRandomGenerated = "Confirmation Number was randomly generated as you did not make a prior reservation."
+            query = connection.execute('INSERT INTO Rentals1 (rid, vid, cellphone, fromDate, fromTime, toDate, toTime, odometer, cardName, cardNo, ExpDate, confNo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, null)', (rid, vid, cellphone, fromdate, fromtime, todate, totime, odometer, cardName, cardNo, ExpDate, None))
+            query.close()
+    # except:
+    #     confNo = 'Error! Unable to add.'
+    #     carType = "N/A"
+    #     cellphone = "N/A"
+    #     fromdate = "N/A"
+    #     fromtime = "N/A"
+    #     todate = "N/A"
+    #     totime = "N/A"
+    
+    context = { 
+        "confNo": confNo,
+        'cellphone': cellphone,
+        'fromdate': fromdate,
+        'fromtime': fromtime,
+        'todate': todate,
+        'totime': totime,
+        'odometer': odometer,
+        'cardName': cardName,
+        'cardNo': cardNo,
+        'ExpDate': ExpDate,
+        'confNoRandomGenerated': confNoRandomGenerated,
+    }
+
+    return render(request, "rentVehicle.html", context)
 
 def returnVehicle(request):
     return render(request, "returnVehicle.html")

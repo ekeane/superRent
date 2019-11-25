@@ -10,6 +10,68 @@
   </head>
   <body>
     <h1>Rent Vehicle</h1>
+  
+      <form style="position: relative; left: 5%; width: 300px;" action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group" >
+            <label for="confNo">Confirmation Number</label>
+            <input type="number" class="form-control" name="confNo" id="confNo" aria-describedby="confNo" placeholder="Enter confirmation number">
+          </div>
+          <div class="form-group" >
+            <label for="vid">Vehicle ID</label>
+            <input type="number" class="form-control" name="vid" id="vid" aria-describedby="vid" placeholder="Enter vehicle ID">
+          </div>
+          <div class="form-group" >
+            <label for="cellphone">Cellphone</label>
+            <input type="tel" class="form-control" name="cellphone" id="cellphone" aria-describedby="carType" placeholder="Enter cell phone number">
+          </div>
+          <div class="form-group">
+            <label for="fromdate">From Date</label>
+            <input type="date" class="form-control" name="fromdate" id="fromdate" placeholder="Enter from date">
+          </div>
+          <div class="form-group">
+            <label for="fromtime">From Time</label>
+            <input type="time" class="form-control" name="fromtime" id="fromtime" placeholder="Enter from time">
+          </div>
+          <div class="form-group">
+            <label for="todate">To Date</label>
+            <input type="date" class="form-control" name="todate" id="todate" placeholder="Enter to date">
+          </div>
+          <div class="form-group">
+            <label for="totime">To Time</label>
+            <input type="time" class="form-control" name="totime" id="totime" placeholder="Enter to time">
+          </div>
+          <div class="form-group" >
+            <label for="odometer">Odometer</label>
+            <input type="number" class="form-control" name="odometer" id="odometer" aria-describedby="odometer" placeholder="Enter odometer">
+          </div>
+          <div class="form-group" >
+            <label for="cardName">Card Name</label>
+            <input type="text" class="form-control" name="cardName" id="cardName" aria-describedby="cardName" placeholder="Enter card name">
+          </div>
+          <div class="form-group" >
+            <label for="cardNo">Card Number</label>
+            <input type="number" class="form-control" name="cardNo" id="cardNo" aria-describedby="cardNo" placeholder="Enter card number">
+          </div>
+          <div class="form-group">
+            <label for="ExpDate">Expiration Date</label>
+            <input type="date" class="form-control" name="ExpDate" id="ExpDate" placeholder="Enter expiration date:">
+          </div>
+          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        </form>
+        <h6> {{ errorMsg }}</h6> 
+        <h6> Confirmation Number:  {{ confNo }} Please see receipt with details below:</h6> 
+        <h6>{{ confNoRandomGenerated }}</h6>
+        <div class="card" style="width: 25rem;">
+          <div class="card-body">
+            <h5 class="card-title">Odometer: {{ odometer }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Cell: {{ cellphone }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Card name: {{ cardName }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Card number: {{ cardNo }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Expiration Date: {{ ExpDate }}</h6>
+            <p class="card-text">Date/Time: {{ fromdate }}, {{ fromtime }} - {{ todate }}, {{ totime }}</p>
+          </div>
+        </div>
    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
