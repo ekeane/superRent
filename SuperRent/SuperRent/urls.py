@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from SuperRentApp.views import landing, makeReservation, rentVehicle, returnVehicle, viewVehicle, viewBranch, viewCustomers, allTables
+from SuperRentApp.views import landing, makeReservation, rentVehicle, returnVehicle, viewVehicle, viewBranch, viewCustomers, allTables, dailyReturns, dailyReturnsBranch
 from django.conf.urls import url
 
 urlpatterns = [
@@ -28,4 +28,6 @@ urlpatterns = [
     url('viewBranch/', viewBranch, name="viewBranch"),
     url('viewCustomers/', viewCustomers, name="viewCustomers"),
     url('allTables/', allTables, name="allTables"),
+    url('dailyReturns/', dailyReturns, name="dailyReturns"),
+    url('dailyReturnsBranch/', dailyReturnsBranch, name="dailyReturnsBranch"),
 ]

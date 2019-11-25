@@ -333,4 +333,10 @@ def allTables(request):
         'allTables': df
     }
 
-    return render(request, "allTables.html", context)
+    return render(request, "allTables.html", context) 
+
+def dailyReturnsBranch(request):
+    return render(request, "dailyReturnsBranch.html")
+
+def dailyReturns(request):
+    return render(request, "dailyReturns.html")

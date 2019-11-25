@@ -9,7 +9,7 @@
     <title>SuperRent</title>
   </head>
   <body>
-    <div style="position: absolute; left: 30%; top: 300px;">
+    <div style="position: absolute; left: 30%; top: 100px;">
       <h1 style="text-align: center">SuperRent</h1>
       <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Vehicles</button></a>
       <a href="{% url 'makeReservation' %}"><button type="button" class="btn btn-outline-primary">Make a reservation</button></a>
@@ -18,7 +18,7 @@
     </div>
 
 
-    <div style="position: absolute; left: 30%; top: 450px;">
+    <div style="position: absolute; left: 30%; top: 250px;">
         <h1 style="text-align: center">View Tables</h1>
         <div class="row">
             <a href="{% url 'viewBranch' %}"><button type="button" class="btn btn-outline-primary">View branch</button></a>
@@ -32,8 +32,13 @@
             <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Vehicle Type</button></a>
             <a href="{% url 'viewVehicle' %}"><button type="button" class="btn btn-outline-primary">View Users</button></a>
             <a href="{% url 'allTables' %}"><button type="button" class="btn btn-outline-primary">View all tables</button></a>
-        </div>
-        
+        </div>        
+      </div>
+      <div style="position: absolute; left: 40%; top: 450px;">
+          <h1 style="text-align: center">View Reports</h1>
+          
+              <a href="{% url 'dailyReturns' %}"><button type="button" class="btn btn-outline-primary">Daily Returns</button></a>
+              <a href="{% url 'dailyReturnsBranch' %}"><button type="button" class="btn btn-outline-primary">Daily Returns Branch</button></a>
       </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
