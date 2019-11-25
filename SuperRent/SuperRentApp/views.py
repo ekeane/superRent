@@ -41,11 +41,23 @@ def makeReservation(request):
     todate = request.POST.get('todate')
     totime = request.POST.get('totime')
 
-    if carType != None:
-        confNo = random.randint(134, 100000)
-        print("THIS IS THE confNO: ", confNo)
-        query = connection.execute('INSERT INTO Reservations1 (confNo, vtname, cellphone, fromDate, fromTime, toDate, toTime) VALUES (%s, %s, %s, %s, %s, %s, %s)', (confNo, carType, cellphone, fromdate, fromtime, todate, totime))
-        query.close()
+    errorMsg = ""
+    try:
+        if carType != None:
+            confNo = random.randint(134, 100000)
+            print("THIS IS THE confNO: ", confNo)
+            query = connection.execute('INSERT INTO Reservations1 (confNo, vtname, cellphone, fromDate, fromTime, toDate, toTime) VALUES (%s, %s, %s, %s, %s, %s, %s)', (confNo, carType, cellphone, fromdate, fromtime, todate, totime))
+            query.close()
+    except:
+        errorMsg = "Sorry this vehicle type is taken or does not exist!"
+        confNo = 'Error! Unable to add.'
+        carType = "N/A"
+        cellphone = "N/A"
+        fromdate = "N/A"
+        fromtime = "N/A"
+        todate = "N/A"
+        totime = "N/A"
+    
 
     context = { 
         'newReservation': confNo,
@@ -56,6 +68,8 @@ def makeReservation(request):
         'fromtime': fromtime,
         'todate': todate,
         'totime': totime,
+
+        'errorMsg': errorMsg,
 
         'newCustomer': outputCustomer[0],
     }
