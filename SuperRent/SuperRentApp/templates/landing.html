@@ -34,9 +34,11 @@
             <a href="{% url 'allTables' %}"><button type="button" class="btn btn-outline-primary">View all tables</button></a>
         </div>        
       </div>
-      <div style="position: absolute; left: 40%; top: 450px;">
+      <div style="position: absolute; left: 30%; top: 450px;">
           <h1 style="text-align: center">View Reports</h1>
           
+              <a href="{% url 'dailyRentals' %}"><button type="button" class="btn btn-outline-primary">Daily Rentals</button></a>
+              <a href="{% url 'dailyRentalsBranch' %}"><button type="button" class="btn btn-outline-primary">Daily Rentals Branch</button></a>
               <a href="{% url 'dailyReturns' %}"><button type="button" class="btn btn-outline-primary">Daily Returns</button></a>
               <a href="{% url 'dailyReturnsBranch' %}"><button type="button" class="btn btn-outline-primary">Daily Returns Branch</button></a>
       </div>
