@@ -21,11 +21,16 @@
           <input type="text" class="form-control" name="location" id="location" placeholder="Enter location">
         </div>
         <div class="form-group">
-          <label for="timeInterval">Time Interval</label>
-          <input type="timeInterval" class="form-control" name="timeInterval" id="timeInterval" placeholder="Enter time interval">
+          <label for="startDate">Start Date</label>
+          <input type="text" class="form-control" name="startDate" id="startDate" placeholder="Enter startDate">
         </div>
+        <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="text" class="form-control" name="endDate" id="endDate" placeholder="Enter endDate">
+          </div>
         <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
       </form>
+      Number of Available Vehicles: {{ length }} <br><br>
 {% autoescape off %}
       {{ query }}
       {% endautoescape %}
