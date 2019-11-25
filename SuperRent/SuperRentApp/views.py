@@ -144,49 +144,67 @@ def viewVehicle(request):
     timeInterval = ''
    ##################################################################
         
-    # 0 empty  
-    if (carType != '' and location != '' and timeInterval != ''):    
-        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s AND carinterval = %s', (carType, location, timeInterval))
+    # All Null
+    if (carType != '' and location != '' and startDate != '' and endDate != ''):    
+        query = connection.execute('select * FROM Vehicle1 WHERE vtname = %s and loc = %s', (carType, location))
     # carType empty or Location Empty or TimeInterval Empty or 2 empty or other 2 empty or other 2 empty or all 3 empty
 
-    # 3 empty
+    # First 2 Empty
     if (carType == '' and location == '' and startDate != '' and endDate != '' ):
         # Works
         # query = connection.execute('select * FROM Vehicle1 WHERE vid NOT IN (SELECT vid FROM Rentals1 WHERE vid = %s)', ('1122'))
-
         query = connection.execute('select * FROM Vehicle1 WHERE vid NOT IN (SELECT vid FROM Rentals1 WHERE fromDate NOT BETWEEN %s AND %s OR toDate NOT BETWEEN %s AND %s)', (startDate, endDate, startDate, endDate))
 
         #query = connection.execute('select * FROM Vehicle1 WHERE vid NOT IN (SELECT vid FROM Rentals1 WHERE fromDate < %s AND toDate > %s)', (startDate, endDate))
-    # 1 empty cases
+
+    # Last 2 Empty
+    if (carType != '' and location != '' and startDate == '' and endDate == ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE vtname = %s and loc = %s', (carType, location))
+
+    # First Empty
+    if (carType == '' and location != '' and startDate != '' and endDate != ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE loc = %s AND vid NOT IN (SELECT vid FROM Rentals1 WHERE fromDate NOT BETWEEN %s AND %s OR toDate NOT BETWEEN %s AND %s)', (location, startDate, endDate, startDate, endDate))
+
+    #Only Location
+    if (carType == '' and location != '' and startDate == '' and endDate == ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE loc = %s', (location))
+
+    #Only Car Type
+    if (carType != '' and location == '' and startDate == '' and endDate == ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE vtname = %s', (carType))
+
+    #Only StartDate End Date (Second Empty)
+    if (carType != '' and location == '' and startDate != '' and endDate != ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE vtname = %s AND vid NOT IN (SELECT vid FROM Rentals1 WHERE fromDate NOT BETWEEN %s AND %s OR toDate NOT BETWEEN %s AND %s)', (carType, startDate, endDate, startDate, endDate))
 
 
-    # 3 empty
+    # All Empty
     if (carType == '' and location == '' and startDate == '' and endDate == '' ):
         query = connection.execute('select * FROM Vehicle1')
 
-    if (carType == '' and location != '' and timeInterval != ''):
-        query = connection.execute('select * FROM Vehicles WHERE carlocation = %s AND carinterval = %s', (location, timeInterval))
+    # if (carType == '' and location != '' and timeInterval != ''):
+    #     query = connection.execute('select * FROM Vehicle1 WHERE carlocation = %s AND carinterval = %s', (location, timeInterval))
 
     
-    if (carType != '' and location == '' and timeInterval != ''):
-        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carinterval = %s', (carType, timeInterval))
+    # if (carType != '' and location == '' and timeInterval != ''):
+    #     query = connection.execute('select * FROM Vehicle1 WHERE cartype = %s AND carinterval = %s', (carType, timeInterval))
 
 
-    if (carType != '' and location != '' and timeInterval == ''):
-        query = connection.execute('select * FROM Vehicles WHERE cartype = %s AND carlocation = %s', (carType, location))
+    # if (carType != '' and location != '' and timeInterval == ''):
+    #     query = connection.execute('select * FROM Vehicle1 WHERE cartype = %s AND carlocation = %s', (carType, location))
 
     # 2 empty cases
 
-    if (carType == '' and location == '' and timeInterval != ''):
-        query = connection.execute('select * FROM Vehicles WHERE carinterval = %s', (timeInterval))
+    # if (carType == '' and location == '' and timeInterval != ''):
+    #     query = connection.execute('select * FROM Vehicle1 WHERE carinterval = %s', (timeInterval))
 
     
-    if (carType != '' and location == '' and timeInterval == ''):
-        query = connection.execute('select * FROM Vehicles WHERE cartype = %s', (carType))
+    # if (carType != '' and location == '' and timeInterval == ''):
+    #     query = connection.execute('select * FROM Vehicle1 WHERE cartype = %s', (carType))
 
 
-    if (carType == '' and location != '' and timeInterval == ''):
-        query = connection.execute('select * FROM Vehicles WHERE carlocation = %s', (location))
+    if (carType == '' and location != '' and startDate == '' and endDate == ''):
+        query = connection.execute('select * FROM Vehicle1 WHERE loc = %s', (location))
 
         #############################################################
 
@@ -219,7 +237,7 @@ def viewVehicle(request):
         new5.append(v[8])
         new6.append(v[9])
         new7.append(v[10])
-    tableData = {'Vehicle License': carId, 'VehicleId': cartype, 'Make': loc, 'Year': interval, 'Model': new, 'Color': new2, 'Odometer': new3, 'Stat': new4, 'Vehicle Type': new5, 'Location': new6, 'City': new7}
+    tableData = {'Vehicle License': carId, 'VehicleId': cartype, 'Make': loc, 'Year': interval, 'Model': new, 'Color': new2, 'Odometer': new3, 'Status': new4, 'Vehicle Type': new5, 'Location': new6, 'City': new7}
     df = pd.DataFrame(data=tableData)
     df = df.to_html()
     
