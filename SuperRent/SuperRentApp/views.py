@@ -40,8 +40,9 @@ def returnVehicle(request):
 def viewVehicle(request):
     carType = request.GET.get('carType')
     location = request.GET.get('location')
-    timeInterval = request.GET.get('timeInterval')
-
+    startDate = request.GET.get('startDate')
+    endDate = request.GET.get('endDate')
+    timeInterval = ''
    ##################################################################
         
     # 0 empty  
@@ -50,8 +51,9 @@ def viewVehicle(request):
     # carType empty or Location Empty or TimeInterval Empty or 2 empty or other 2 empty or other 2 empty or all 3 empty
 
     # 3 empty
-    if (carType == '' and location == '' and timeInterval == ''):
-        query = connection.execute('select * FROM Vehicles')
+    if (carType == '' and location == '' and startDate == '' and endDate == '' ):
+        query = connection.execute('select * FROM Vehicle1 WHERE vid NOT IN (SELECT vid FROM Rentals1 WHERE vid = %s)', ('1122'))
+        #query = connection.execute('select * FROM Vehicle1 WHERE vid NOT IN (SELECT vid FROM Rentals1 WHERE fromDate < %s AND toDate > %s)', (startDate, endDate))
     # 1 empty cases
 
     if (carType == '' and location != '' and timeInterval != ''):
@@ -90,18 +92,33 @@ def viewVehicle(request):
     cartype = []
     loc = []
     interval = []
+    new = []
+    new2 = []
+    new3 = []
+    new4 = []
+    new5 = []
+    new6 = []
+    new7 = []
     for v in output:
         carId.append(v[0])
         cartype.append(v[1])
         loc.append(v[2])
         interval.append(v[3])
-    
-    tableData = {'ID': carId, 'Car Type': cartype, 'Location': loc, 'Interval': interval}
+        new.append(v[4])
+        new2.append(v[5])
+        new3.append(v[6])
+        new4.append(v[7])
+        new5.append(v[8])
+        new6.append(v[9])
+        new7.append(v[10])
+    tableData = {'Vehicle License': carId, 'VehicleId': cartype, 'Make': loc, 'Year': interval, 'Model': new, 'Color': new2, 'Odometer': new3, 'Stat': new4, 'Vehicle Type': new5, 'Location': new6, 'City': new7}
     df = pd.DataFrame(data=tableData)
     df = df.to_html()
-
+    
+    lenlen = len(new2)
     context = {
         'query': df,
+        'length': lenlen,
         'carType': carType,
         'location': location,
         'timeInterval': timeInterval,
