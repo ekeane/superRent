@@ -1,4 +1,4 @@
-# TODO
+# SuperRent Setup
 
 
 (Make sure Python3 and postgresql is installed)
@@ -19,4 +19,5 @@
 
 
 We use a cloud instance of Postgres via ElephentSQL
+
 Django Backend
