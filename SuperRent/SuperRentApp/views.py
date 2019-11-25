@@ -336,7 +336,53 @@ def allTables(request):
     return render(request, "allTables.html", context) 
 
 def dailyReturnsBranch(request):
-    return render(request, "dailyReturnsBranch.html")
+    date = request.GET.get('date')
+    branch = request.GET.get('branch')
+    query = connection.execute('SELECT vt.vtname, count(*) from Rentals1 r, Vehicle1 v, Branch1 b, VehicleType1 vt WHERE r.vid=v.vid AND v.loc=b.loc AND r.fromDate = %s and b.city = %s and v.vtname = vt.vtname group by vt.vtname', (date, branch))
+
+    output = []
+    for row in query:
+        output.append(row)
+    query.close()
+
+    first = []
+    second = []
+    for info in output:
+        first.append(info[0])
+        second.append(info[1])
+
+    tableData = {'Vehicle Type': first, 'Count': second}
+    df = pd.DataFrame(data=tableData)
+    df = df.to_html()
+
+    context = {
+        'dailyReturnsBranch': df
+    }
+    return render(request, "dailyReturnsBranch.html", context)
 
 def dailyReturns(request):
-    return render(request, "dailyReturns.html")
+    date = request.GET.get('date')
+    query = connection.execute('select b.city, count(v.vtname), v.vtname from Branch1 b, Vehicle1 v where v.vtname in (SELECT vt.vtname from Rentals1 r, VehicleType1 vt WHERE r.vid=v.vid AND v.loc=b.loc AND r.fromDate = %s and v.vtname = vt.vtname group by vt.vtname) group by b.city, v.vtname', (date))
+
+    output = []
+    for row in query:
+        output.append(row)
+    query.close()
+
+    first = []
+    second = []
+    third = []
+    for info in output:
+        first.append(info[0])
+        second.append(info[1])
+        third.append(info[2])
+
+    tableData = {'City': first, 'Count': second, 'Vehicle Type': third}
+    df = pd.DataFrame(data=tableData)
+    df = df.to_html()
+
+    context = {
+        'dailyReturns': df
+    }
+
+    return render(request, "dailyReturns.html", context)

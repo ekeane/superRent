@@ -6,10 +6,22 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-        <title>View all daily returns branch</title>
+        <title>View all daily returns for branch</title>
         </head>
         <body>
-        <h1>View all daily returns branch</h1>
+        <h1>View all daily returns for branch</h1>
+        <form style="position: relative; left: 5%; width: 300px;" action="" method="GET">
+            {% csrf_token %}
+            <div class="form-group" >
+                <label for="date">Date</label>
+                <input type="date" class="form-control" name="date" id="date" aria-describedby="date" placeholder="Enter date">
+            </div>
+            <div class="form-group" >
+                <label for="branch">Branch</label>
+                <input type="text" class="form-control" name="branch" id="branch" aria-describedby="branch" placeholder="Enter branch">
+            </div>
+            <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        </form>
         {% autoescape off %}
             {{ dailyReturnsBranch }}
         {% endautoescape %}
