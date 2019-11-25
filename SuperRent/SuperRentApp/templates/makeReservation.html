@@ -34,27 +34,27 @@
           {% csrf_token %}
           <div class="form-group" >
             <label for="carType">Car Type</label>
-            <input value={{ carType }} type="text" class="form-control" name="carType" id="carType" aria-describedby="carType" placeholder="Enter car type">
+            <input type="text" class="form-control" name="carType" id="carType" aria-describedby="carType" placeholder="Enter car type">
           </div>
           <div class="form-group" >
               <label for="cellphone">Cellphone</label>
-              <input value={{ cellphone }} type="tel" class="form-control" name="cellphone" id="cellphone" aria-describedby="carType" placeholder="Enter cell phone number">
+              <input type="tel" class="form-control" name="cellphone" id="cellphone" aria-describedby="carType" placeholder="Enter cell phone number">
             </div>
           <div class="form-group">
             <label for="fromdate">From Date</label>
-            <input value={{ fromdate }} type="date" class="form-control" name="fromdate" id="fromdate" placeholder="Enter from date">
+            <input type="date" class="form-control" name="fromdate" id="fromdate" placeholder="Enter from date">
           </div>
           <div class="form-group">
             <label for="fromtime">From Time</label>
-            <input value={{ fromtime }} type="time" class="form-control" name="fromtime" id="fromtime" placeholder="Enter from time">
+            <input type="time" class="form-control" name="fromtime" id="fromtime" placeholder="Enter from time">
           </div>
             <div class="form-group">
             <label for="todate">To Date</label>
-            <input value={{ todate }} type="date" class="form-control" name="todate" id="todate" placeholder="Enter to date">
+            <input type="date" class="form-control" name="todate" id="todate" placeholder="Enter to date">
           </div>
           <div class="form-group">
             <label for="totime">To Time</label>
-            <input value={{ totime }} type="time" class="form-control" name="totime" id="totime" placeholder="Enter to time">
+            <input type="time" class="form-control" name="totime" id="totime" placeholder="Enter to time">
           </div>
           <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
         </form>
