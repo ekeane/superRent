@@ -90,7 +90,8 @@ def rentVehicle(request):
     errorMsg = ""
     confNoRandomGenerated = ""
     # try:
-    if cellphone != None:
+    if type(confNo) is None or confNo is None or len(confNo) > 2:
+        print('foo', confNo, type(confNo))
         confNoOutput = []
         output = connection.execute('select * FROM Reservations1 WHERE confNo = %s', (confNo))
         
@@ -102,12 +103,15 @@ def rentVehicle(request):
             rid = random.randint(134, 1000000)
             query = connection.execute('INSERT INTO Rentals1 (rid, vid, cellphone, fromDate, fromTime, toDate, toTime, odometer, cardName, cardNo, ExpDate, confNo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (rid, vid, cellphone, fromdate, fromtime, todate, totime, odometer, cardName, cardNo, ExpDate, confNo))
             query.close()
-        else:
-            print("in else")
-            rid = random.randint(134, 1000000)
-            confNoRandomGenerated = "Confirmation Number was randomly generated as you did not make a prior reservation."
-            query = connection.execute('INSERT INTO Rentals1 (rid, vid, cellphone, fromDate, fromTime, toDate, toTime, odometer, cardName, cardNo, ExpDate, confNo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, null)', (rid, vid, cellphone, fromdate, fromtime, todate, totime, odometer, cardName, cardNo, ExpDate, None))
-            query.close()
+    else:
+        print("in else")
+        rid = random.randint(134, 1000000)
+        # confNoRandomGenerated = "Confirmation Number was randomly generated as you did not make a prior reservation."
+        confNoRandomGenerated = "Confirmation Number was not generated as you did not make a prior reservation"
+        query = connection.execute('INSERT INTO Customers1 (cellphone) VALUES (%s)', (cellphone))
+        query.close()
+        query = connection.execute('INSERT INTO Rentals1 (rid, vid, cellphone, fromDate, fromTime, toDate, toTime, odometer, cardName, cardNo, ExpDate) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (rid, vid, cellphone, fromdate, fromtime, todate, totime, odometer, cardName, cardNo, ExpDate))
+        query.close()
     # except:
     #     confNo = 'Error! Unable to add.'
     #     carType = "N/A"
