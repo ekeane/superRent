@@ -45,7 +45,6 @@ def makeReservation(request):
     try:
         if carType != None:
             confNo = random.randint(134, 100000)
-            print("THIS IS THE confNO: ", confNo)
             query = connection.execute('INSERT INTO Reservations1 (confNo, vtname, cellphone, fromDate, fromTime, toDate, toTime) VALUES (%s, %s, %s, %s, %s, %s, %s)', (confNo, carType, cellphone, fromdate, fromtime, todate, totime))
             query.close()
     except:
